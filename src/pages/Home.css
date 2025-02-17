@@ -1,0 +1,38 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.search-pagination-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.add-order-button {
+  align-self: flex-end;
+  margin-bottom: 20px;
+}
+
+.pagination {
+  display: flex;
+  gap: 5px;
+}
+
+.pagination button {
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  cursor: pointer;
+  background-color: blue;
+  margin-top: 20px;
+}
+
+.pagination button:hover {
+  background-color: lightblue;
+}
+
+label {
+    font-size: small;
+}
