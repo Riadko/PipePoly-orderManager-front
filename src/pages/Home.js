@@ -113,12 +113,16 @@ const Home = () => {
       )}
 
       <div className="search-pagination-container">
-        <input
-          type="text"
-          placeholder="Search by Order Number or Client Name"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
+        <div className="search-container">
+          <input
+            type="text"
+            placeholder="Search by Order Number or Client Name"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+          <i className="fas fa-search search-icon"></i> {/* FontAwesome icon */}
+        </div>
+
         <select onChange={(e) => setOrdersPerPage(Number(e.target.value))} value={ordersPerPage}>
           <option value={10}>10</option>
           <option value={20}>20</option>

@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import PendingOrders from "./pages/Home";
 import Validated from "./pages/Validated";
 import Finished from "./pages/Finished";
+import "@fortawesome/fontawesome-free/css/all.min.css";
 
 const App = () => {
   return (

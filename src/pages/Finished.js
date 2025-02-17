@@ -77,12 +77,17 @@ const Finished = () => {
       <h1>Finished Orders</h1>
 
       <div className="search-pagination-container">
-        <input
-          type="text"
-          placeholder="Search by Order Number or Client Name"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
+        <div className="search-container">
+          <input
+            type="text"
+            placeholder="Search by Order Number or Client Name"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+          <i className="fas fa-search search-icon"></i> {/* FontAwesome icon */}
+        </div>
+
+
         <div className="orders-per-page">
           <span>Orders per page : </span>
           <select onChange={(e) => setOrdersPerPage(Number(e.target.value))} value={ordersPerPage}>

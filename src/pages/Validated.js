@@ -46,12 +46,16 @@ const Validated = () => {
       <h1>Validated Orders</h1>
 
       <div className="search-pagination-container">
-        <input
-          type="text"
-          placeholder="Search by Order Number or Client Name"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
+        <div className="search-container">
+          <input
+            type="text"
+            placeholder="Search by Order Number or Client Name"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+          <i className="fas fa-search search-icon"></i> {/* FontAwesome icon */}
+        </div>
+
         <select onChange={(e) => setOrdersPerPage(Number(e.target.value))} value={ordersPerPage}>
           <option value={10}>10</option>
           <option value={20}>20</option>
@@ -69,6 +73,7 @@ const Validated = () => {
             <th>Product</th>
             <th>Quantity</th>
             <th>Delivery Date</th>
+            <th>Status</th>
             <th>Remarks</th>
             <th>Action</th>
           </tr>
@@ -85,6 +90,7 @@ const Validated = () => {
                   ? format(new Date(order.delivery_date), "dd/MM/yyyy 'à' HH:mm", { locale: fr })
                   : "N/A"}
               </td>
+              <td>{order.status}</td>
               <td>{order.remarks}</td>
               <td>
                 <button onClick={(e) => { e.stopPropagation(); finishOrder(order.id); }}>Mark as Finished</button>
@@ -112,6 +118,7 @@ const Validated = () => {
             <p><strong>Product:</strong> {selectedOrder.product}</p>
             <p><strong>Quantity:</strong> {selectedOrder.quantity}</p>
             <p><strong>Delivery Date:</strong> {format(new Date(selectedOrder.delivery_date), "dd/MM/yyyy 'à' HH:mm", { locale: fr })}</p>
+            <p><strong>Status:</strong> {selectedOrder.status}</p>
             <p><strong>Remarks:</strong> {selectedOrder.remarks}</p>
             <button onClick={() => setShowPopup(false)}>Close</button>
           </div>

@@ -70,3 +70,31 @@
 .popup-content button:hover {
   background-color: #45a049;
 }
+
+.search-container {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  max-width: 300px; /* Adjust as needed */
+}
+
+/* Style the input field */
+.search-container input {
+  width: 100%;
+  padding: 10px 40px 10px 10px; /* Add right padding for the icon */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  outline: none;
+}
+
+/* Position the search icon */
+.search-container .search-icon {
+  position: absolute;
+  right: 12px; /* Adjust this value if needed */
+  top: 50%;
+  transform: translateY(-50%);
+  color: #666;
+  font-size: 16px;
+  pointer-events: none; /* Prevent clicking on the icon */
+}
