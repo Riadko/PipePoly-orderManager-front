@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
-import './Home.css'; // Import the CSS file
+import './Home.css';
 
 const Home = () => {
   const [orders, setOrders] = useState([]);
@@ -12,16 +12,17 @@ const Home = () => {
     client_name: "",
     product: "",
     quantity: 1,
-    order_date: new Date().toISOString().split('T')[0], // Set default to today's date
+    order_date: new Date().toISOString().split('T')[0],
     delivery_date: "",
     status: "normal",
     remarks: ""
   });
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const [ordersPerPage, setOrdersPerPage] = useState(10); // Default to 10
+  const [ordersPerPage, setOrdersPerPage] = useState(10);
+  const [selectedOrder, setSelectedOrder] = useState(null); // State for selected order
+  const [showPopup, setShowPopup] = useState(false); // State for popup visibility
 
-  // Récupérer les commandes en attente au montage du composant
   useEffect(() => {
     axios
       .get("http://localhost:5000/orders/pending")
@@ -29,16 +30,9 @@ const Home = () => {
       .catch((err) => console.error(err));
   }, []);
 
-
   const handleChange = (e) => {
     const { name, value } = e.target;
-  
-    if (name === "order_date" || name === "delivery_date") {
-      console.log(`Setting ${name} to:`, value); // Log the date value
-      setNewOrder({ ...newOrder, [name]: value });
-    } else {
-      setNewOrder({ ...newOrder, [name]: value });
-    }
+    setNewOrder({ ...newOrder, [name]: value });
   };
 
   const addOrder = (e) => {
@@ -71,12 +65,17 @@ const Home = () => {
       order.client_name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  // Pagination logic
   const indexOfLastOrder = currentPage * ordersPerPage;
   const indexOfFirstOrder = indexOfLastOrder - ordersPerPage;
   const currentOrders = filteredOrders.slice(indexOfFirstOrder, indexOfLastOrder);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  // Handle row click
+  const handleRowClick = (order) => {
+    setSelectedOrder(order);
+    setShowPopup(true);
+  };
 
   return (
     <div className="container">
@@ -99,18 +98,14 @@ const Home = () => {
               <label htmlFor="status">Status</label>
               <select name="status" onChange={handleChange}>
                 <option value="urgent">Urgent</option>
-                <option value="normal" selected>
-                  Normal
-                </option>
+                <option value="normal" selected>Normal</option>
                 <option value="can wait">Can Wait</option>
               </select>
               <label htmlFor="remarks">Remarks</label>
               <textarea name="remarks" placeholder="Remarks" onChange={handleChange}></textarea>
               <div style={{ display: "flex", justifyContent: "space-between" }}>
                 <button type="submit">Save</button>
-                <button style={{ background: "red" }} onClick={() => setShowForm(false)}>
-                  Cancel
-                </button>
+                <button style={{ background: "red" }} onClick={() => setShowForm(false)}>Cancel</button>
               </div>
             </form>
           </div>
@@ -124,7 +119,6 @@ const Home = () => {
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
-
         <select onChange={(e) => setOrdersPerPage(Number(e.target.value))} value={ordersPerPage}>
           <option value={10}>10</option>
           <option value={20}>20</option>
@@ -150,7 +144,7 @@ const Home = () => {
         </thead>
         <tbody>
           {currentOrders.map((order) => (
-            <tr key={order.id}>
+            <tr key={order.id} onClick={() => handleRowClick(order)} style={{ cursor: "pointer" }}>
               <td>{order.order_number}</td>
               <td>{order.client_name}</td>
               <td>{order.product}</td>
@@ -168,7 +162,7 @@ const Home = () => {
               <td>{order.status}</td>
               <td>{order.remarks}</td>
               <td>
-                <button onClick={() => validateOrder(order.id)}>Validate Order</button>
+                <button onClick={(e) => { e.stopPropagation(); validateOrder(order.id); }}>Validate Order</button>
               </td>
             </tr>
           ))}
@@ -182,6 +176,24 @@ const Home = () => {
           </button>
         ))}
       </div>
+
+      {/* Popup for order details */}
+      {showPopup && selectedOrder && (
+        <div className="popup">
+          <div className="popup-content">
+            <h2>Order Details</h2>
+            <p><strong>Order Number:</strong> {selectedOrder.order_number}</p>
+            <p><strong>Client:</strong> {selectedOrder.client_name}</p>
+            <p><strong>Product:</strong> {selectedOrder.product}</p>
+            <p><strong>Quantity:</strong> {selectedOrder.quantity}</p>
+            <p><strong>Order Date:</strong> {format(new Date(selectedOrder.order_date), "dd/MM/yyyy 'à' HH:mm", { locale: fr })}</p>
+            <p><strong>Delivery Date:</strong> {format(new Date(selectedOrder.delivery_date), "dd/MM/yyyy 'à' HH:mm", { locale: fr })}</p>
+            <p><strong>Status:</strong> {selectedOrder.status}</p>
+            <p><strong>Remarks:</strong> {selectedOrder.remarks}</p>
+            <button onClick={() => setShowPopup(false)}>Close</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
