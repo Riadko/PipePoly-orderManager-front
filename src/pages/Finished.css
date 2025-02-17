@@ -1,6 +1,7 @@
 .container {
   display: flex;
   flex-direction: column;
+  gap: 20px; /* Add some spacing between elements */
 }
 
 .search-pagination-container {
@@ -21,9 +22,50 @@
   background-color: #f9f9f9;
   cursor: pointer;
   background-color: blue;
-  margin-top: 20px;
+  color: white; /* Ensure text is visible */
 }
 
 .pagination button:hover {
   background-color: lightblue;
+}
+
+/* Styles for the bottom controls */
+.bottom-controls {
+  display: flex;
+  justify-content: space-between; /* Space out pagination and download section */
+  align-items: center; /* Align vertically */
+}
+
+/* Styles for the download container */
+.download-container {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Spacing between elements */
+}
+
+.date-range-container {
+  display: flex;
+  gap: 10px; /* Spacing between date inputs */
+  align-items: center;
+  margin-top: 10px;
+}
+
+.date-range-container label {
+  display: flex;
+  align-items: center;
+  gap: 5px; /* Spacing between label and input */
+}
+
+/* Style for the download button */
+.download-container button {
+  padding: 8px 16px;
+  background-color: #4CAF50; /* Green background */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.download-container button:hover {
+  background-color: #45a049; /* Darker green on hover */
 }
