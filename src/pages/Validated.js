@@ -13,13 +13,13 @@ const Validated = () => {
   const [showPopup, setShowPopup] = useState(false); // State for popup visibility
 
   useEffect(() => {
-    axios.get("http://localhost:5000/orders/validated")
+    axios.get("https://pipepoly-ordermanager-back-1.onrender.com/orders/validated")
       .then(res => setOrders(res.data))
       .catch(err => console.error(err));
   }, []);
 
   const finishOrder = (id) => {
-    axios.put(`http://localhost:5000/orders/${id}/finish`)
+    axios.put(`https://pipepoly-ordermanager-back-1.onrender.com/orders/${id}/finish`)
       .then(() => setOrders(orders.filter(order => order.id !== id)));
   };
 
