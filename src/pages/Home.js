@@ -25,7 +25,7 @@ const Home = () => {
 
   useEffect(() => {
     axios
-      .get("https://pipepoly-ordermanager-back-1.onrender.com/orders/pending")
+      .get("https://pipepoly-ordermanager-back.onrender.com/orders/pending")
       .then((res) => setOrders(res.data))
       .catch((err) => console.error(err));
   }, []);
@@ -38,9 +38,9 @@ const Home = () => {
   const addOrder = (e) => {
     e.preventDefault();
     axios
-      .post("https://pipepoly-ordermanager-back-1.onrender.com/orders", newOrder)
+      .post("https://pipepoly-ordermanager-back.onrender.com/orders", newOrder)
       .then(() => {
-        axios.get("https://pipepoly-ordermanager-back-1.onrender.com/orders/pending").then((res) => {
+        axios.get("https://pipepoly-ordermanager-back.onrender.com/orders/pending").then((res) => {
           setOrders(res.data);
         });
         setShowForm(false);
@@ -50,9 +50,9 @@ const Home = () => {
 
   const validateOrder = (orderId) => {
     axios
-      .put(`https://pipepoly-ordermanager-back-1.onrender.com/orders/${orderId}/validate`)
+      .put(`https://pipepoly-ordermanager-back.onrender.com/orders/${orderId}/validate`)
       .then(() => {
-        axios.get("https://pipepoly-ordermanager-back-1.onrender.com/orders/pending").then((res) => {
+        axios.get("https://pipepoly-ordermanager-back.onrender.com/orders/pending").then((res) => {
           setOrders(res.data);
         });
       })

@@ -16,7 +16,7 @@ const Finished = () => {
   const [showPopup, setShowPopup] = useState(false); // State for popup visibility
 
   useEffect(() => {
-    axios.get("https://pipepoly-ordermanager-back-1.onrender.com/orders/finished")
+    axios.get("https://pipepoly-ordermanager-back.onrender.com/orders/finished")
       .then(res => setOrders(res.data))
       .catch(err => console.error(err));
   }, []);
