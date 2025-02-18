@@ -132,6 +132,7 @@ const Home = () => {
         </select>
       </div>
 
+      <div className="table-container">
       <table>
         <thead>
           <tr>
@@ -155,12 +156,12 @@ const Home = () => {
               <td>{order.quantity}</td>
               <td>
                 {order.order_date
-                  ? format(new Date(order.order_date), "dd/MM/yyyy 'à' HH:mm", { locale: fr })
+                  ? format(new Date(order.order_date), "dd/MM/yyyy", { locale: fr })
                   : "N/A"}
               </td>
               <td>
                 {order.delivery_date
-                  ? format(new Date(order.delivery_date), "dd/MM/yyyy 'à' HH:mm", { locale: fr })
+                  ? format(new Date(order.delivery_date), "dd/MM/yyyy", { locale: fr })
                   : "N/A"}
               </td>
               <td>{order.status}</td>
@@ -172,6 +173,7 @@ const Home = () => {
           ))}
         </tbody>
       </table>
+    </div>
 
       <div className="pagination">
         {Array.from({ length: Math.ceil(filteredOrders.length / ordersPerPage) }, (_, index) => (
@@ -190,8 +192,8 @@ const Home = () => {
             <p><strong>Client:</strong> {selectedOrder.client_name}</p>
             <p><strong>Product:</strong> {selectedOrder.product}</p>
             <p><strong>Quantity:</strong> {selectedOrder.quantity}</p>
-            <p><strong>Order Date:</strong> {format(new Date(selectedOrder.order_date), "dd/MM/yyyy 'à' HH:mm", { locale: fr })}</p>
-            <p><strong>Delivery Date:</strong> {format(new Date(selectedOrder.delivery_date), "dd/MM/yyyy 'à' HH:mm", { locale: fr })}</p>
+            <p><strong>Order Date:</strong> {format(new Date(selectedOrder.order_date), "dd/MM/yyyy", { locale: fr })}</p>
+            <p><strong>Delivery Date:</strong> {format(new Date(selectedOrder.delivery_date), "dd/MM/yyyy", { locale: fr })}</p>
             <p><strong>Status:</strong> {selectedOrder.status}</p>
             <p><strong>Remarks:</strong> {selectedOrder.remarks}</p>
             <button onClick={() => setShowPopup(false)}>Close</button>

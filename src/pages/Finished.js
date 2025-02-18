@@ -50,13 +50,13 @@ const Finished = () => {
       "Product": order.product,
       "Quantity": order.quantity,
       "Delivery Date": order.delivery_date
-        ? format(new Date(order.delivery_date), "dd/MM/yyyy 'à' HH:mm", { locale: fr })
+        ? format(new Date(order.delivery_date), "dd/MM/yyyy", { locale: fr })
         : "N/A",
       "Validated Date": order.validated_date
-        ? format(new Date(order.validated_date), "dd/MM/yyyy 'à' HH:mm", { locale: fr })
+        ? format(new Date(order.validated_date), "dd/MM/yyyy", { locale: fr })
         : "N/A",
       "Finished Date": order.finished_date
-        ? format(new Date(order.finished_date), "dd/MM/yyyy 'à' HH:mm", { locale: fr })
+        ? format(new Date(order.finished_date), "dd/MM/yyyy", { locale: fr })
         : "N/A",
     }));
 
@@ -87,9 +87,7 @@ const Finished = () => {
           <i className="fas fa-search search-icon"></i> {/* FontAwesome icon */}
         </div>
 
-
         <div className="orders-per-page">
-          <span>Orders per page : </span>
           <select onChange={(e) => setOrdersPerPage(Number(e.target.value))} value={ordersPerPage}>
             <option value={10}>10</option>
             <option value={20}>20</option>
@@ -100,44 +98,46 @@ const Finished = () => {
         </div>
       </div>
 
-      <table>
-        <thead>
-          <tr>
-            <th>Order Number</th>
-            <th>Client</th>
-            <th>Product</th>
-            <th>Quantity</th>
-            <th>Delivery Date</th>
-            <th>Validated Date</th>
-            <th>Finished Date</th>
-          </tr>
-        </thead>
-        <tbody>
-          {currentOrders.map(order => (
-            <tr key={order.id} onClick={() => handleRowClick(order)} style={{ cursor: "pointer" }}>
-              <td>{order.order_number}</td>
-              <td>{order.client_name}</td>
-              <td>{order.product}</td>
-              <td>{order.quantity}</td>
-              <td>
-                {order.delivery_date
-                  ? format(new Date(order.delivery_date), "dd/MM/yyyy 'à' HH:mm", { locale: fr })
-                  : "N/A"}
-              </td>
-              <td>
-                {order.validated_date
-                  ? format(new Date(order.validated_date), "dd/MM/yyyy 'à' HH:mm", { locale: fr })
-                  : "N/A"}
-              </td>
-              <td>
-                {order.finished_date
-                  ? format(new Date(order.finished_date), "dd/MM/yyyy 'à' HH:mm", { locale: fr })
-                  : "N/A"}
-              </td>
+      <div className="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Order Number</th>
+              <th>Client</th>
+              <th>Product</th>
+              <th>Quantity</th>
+              <th>Delivery Date</th>
+              <th>Validated Date</th>
+              <th>Finished Date</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {currentOrders.map(order => (
+              <tr key={order.id} onClick={() => handleRowClick(order)} style={{ cursor: "pointer" }}>
+                <td>{order.order_number}</td>
+                <td>{order.client_name}</td>
+                <td>{order.product}</td>
+                <td>{order.quantity}</td>
+                <td>
+                  {order.delivery_date
+                    ? format(new Date(order.delivery_date), "dd/MM/yyyy", { locale: fr })
+                    : "N/A"}
+                </td>
+                <td>
+                  {order.validated_date
+                    ? format(new Date(order.validated_date), "dd/MM/yyyy", { locale: fr })
+                    : "N/A"}
+                </td>
+                <td>
+                  {order.finished_date
+                    ? format(new Date(order.finished_date), "dd/MM/yyyy", { locale: fr })
+                    : "N/A"}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
 
       <div className="bottom-controls">
         <div className="pagination">
@@ -180,9 +180,9 @@ const Finished = () => {
             <p><strong>Client:</strong> {selectedOrder.client_name}</p>
             <p><strong>Product:</strong> {selectedOrder.product}</p>
             <p><strong>Quantity:</strong> {selectedOrder.quantity}</p>
-            <p><strong>Delivery Date:</strong> {format(new Date(selectedOrder.delivery_date), "dd/MM/yyyy 'à' HH:mm", { locale: fr })}</p>
-            <p><strong>Validated Date:</strong> {format(new Date(selectedOrder.validated_date), "dd/MM/yyyy 'à' HH:mm", { locale: fr })}</p>
-            <p><strong>Finished Date:</strong> {format(new Date(selectedOrder.finished_date), "dd/MM/yyyy 'à' HH:mm", { locale: fr })}</p>
+            <p><strong>Delivery Date:</strong> {format(new Date(selectedOrder.delivery_date), "dd/MM/yyyy", { locale: fr })}</p>
+            <p><strong>Validated Date:</strong> {format(new Date(selectedOrder.validated_date), "dd/MM/yyyy", { locale: fr })}</p>
+            <p><strong>Finished Date:</strong> {format(new Date(selectedOrder.finished_date), "dd/MM/yyyy", { locale: fr })}</p>
             <button onClick={() => setShowPopup(false)}>Close</button>
           </div>
         </div>

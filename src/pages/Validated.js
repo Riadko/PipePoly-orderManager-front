@@ -65,40 +65,42 @@ const Validated = () => {
         </select>
       </div>
 
-      <table>
-        <thead>
-          <tr>
-            <th>Order Number</th>
-            <th>Client</th>
-            <th>Product</th>
-            <th>Quantity</th>
-            <th>Delivery Date</th>
-            <th>Status</th>
-            <th>Remarks</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {currentOrders.map(order => (
-            <tr key={order.id} onClick={() => handleRowClick(order)} style={{ cursor: "pointer" }}>
-              <td>{order.order_number}</td>
-              <td>{order.client_name}</td>
-              <td>{order.product}</td>
-              <td>{order.quantity}</td>
-              <td>
-                {order.delivery_date
-                  ? format(new Date(order.delivery_date), "dd/MM/yyyy 'à' HH:mm", { locale: fr })
-                  : "N/A"}
-              </td>
-              <td>{order.status}</td>
-              <td>{order.remarks}</td>
-              <td>
-                <button onClick={(e) => { e.stopPropagation(); finishOrder(order.id); }}>Mark as Finished</button>
-              </td>
+      <div className="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Order Number</th>
+              <th>Client</th>
+              <th>Product</th>
+              <th>Quantity</th>
+              <th>Delivery Date</th>
+              <th>Status</th>
+              <th>Remarks</th>
+              <th>Action</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {currentOrders.map(order => (
+              <tr key={order.id} onClick={() => handleRowClick(order)} style={{ cursor: "pointer" }}>
+                <td>{order.order_number}</td>
+                <td>{order.client_name}</td>
+                <td>{order.product}</td>
+                <td>{order.quantity}</td>
+                <td>
+                  {order.delivery_date
+                    ? format(new Date(order.delivery_date), "dd/MM/yyyy", { locale: fr })
+                    : "N/A"}
+                </td>
+                <td>{order.status}</td>
+                <td>{order.remarks}</td>
+                <td>
+                  <button onClick={(e) => { e.stopPropagation(); finishOrder(order.id); }}>Mark as Finished</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
 
       <div className="pagination">
         {Array.from({ length: Math.ceil(filteredOrders.length / ordersPerPage) }, (_, index) => (
@@ -117,7 +119,7 @@ const Validated = () => {
             <p><strong>Client:</strong> {selectedOrder.client_name}</p>
             <p><strong>Product:</strong> {selectedOrder.product}</p>
             <p><strong>Quantity:</strong> {selectedOrder.quantity}</p>
-            <p><strong>Delivery Date:</strong> {format(new Date(selectedOrder.delivery_date), "dd/MM/yyyy 'à' HH:mm", { locale: fr })}</p>
+            <p><strong>Delivery Date:</strong> {format(new Date(selectedOrder.delivery_date), "dd/MM/yyyy", { locale: fr })}</p>
             <p><strong>Status:</strong> {selectedOrder.status}</p>
             <p><strong>Remarks:</strong> {selectedOrder.remarks}</p>
             <button onClick={() => setShowPopup(false)}>Close</button>

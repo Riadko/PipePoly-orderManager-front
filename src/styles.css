@@ -12,7 +12,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 15px;
+    padding: 30px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }  
   
@@ -115,3 +115,8 @@ body {
     border-radius: 5px;
   }
   
+  @media (max-width: 768px) {
+    nav {
+      padding: 40px;
+    }
+  }

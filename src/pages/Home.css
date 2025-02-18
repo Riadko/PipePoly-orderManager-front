@@ -4,6 +4,8 @@
   flex-direction: column;
   align-items: center;
   padding: 20px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 /* Search and Pagination */
@@ -21,12 +23,14 @@
   width: 60%;
   border: 1px solid #ccc;
   border-radius: 5px;
+  box-sizing: border-box; /* Ensure padding is included in the width */
 }
 
 .search-pagination-container select {
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  box-sizing: border-box; /* Ensure padding is included in the width */
 }
 
 /* Add Order Button */
@@ -45,12 +49,18 @@
   background-color: #0056b3;
 }
 
+/* Table Container */
+.table-container {
+  width: 100%;
+  max-width: 1000px;
+  overflow-x: auto;
+}
+
 /* Table Styling */
 table {
   width: 100%;
-  max-width: 1000px;
   border-collapse: collapse;
-  margin-top: 20px;
+  min-width: 800px; /* Ensure the table has a minimum width */
 }
 
 table th, table td {
@@ -187,6 +197,7 @@ table tr:hover {
   border-radius: 5px;
   font-size: 14px;
   outline: none;
+  box-sizing: border-box; /* Ensure padding is included in the width */
 }
 
 /* Position the search icon */
@@ -198,4 +209,45 @@ table tr:hover {
   color: #666;
   font-size: 16px;
   pointer-events: none; /* Prevent clicking on the icon */
+}
+
+/* Media Queries for Responsiveness */
+@media (min-width: 768px) {
+  .search-pagination-container {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .search-pagination-container input {
+    width: 60%;
+    margin-bottom: 0;
+  }
+
+  .search-pagination-container select {
+    margin-bottom: 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .search-pagination-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .search-pagination-container input,
+  .search-pagination-container select {
+    width: 20%;
+    margin-bottom: 10px;
+    align-self: flex-end;
+    margin-right: 5px;
+  }
+
+  .pagination {
+    justify-content: flex-end;
+    width: 20%;
+  }
+
+  .add-order-button {
+    align-self: center;
+  }
 }
