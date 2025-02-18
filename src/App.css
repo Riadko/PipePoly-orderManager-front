@@ -86,7 +86,8 @@ nav {
   }
 
   .nav-links.open {
-    display: flex; /* Show menu when open */
+    display: flex;
+    z-index: 999;
   }
 
   .nav-links li {
